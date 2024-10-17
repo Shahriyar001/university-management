@@ -6,18 +6,40 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
-import { Button, Layout, Menu, theme } from "antd";
-import { createElement, useState } from "react";
+import { Button, Layout, Menu, MenuProps, theme } from "antd";
+import { Children, createElement, useState } from "react";
 
-const items = [
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  UserOutlined,
-].map((icon, index) => ({
+const items: MenuProps["item"] = [
+  {
+    key: "1",
+    label: "Dashboard",
+  },
+  {
+    key: "2",
+    label: "Profile",
+  },
+  {
+    key: "3",
+    label: "User Management",
+    children: [
+      {
+        key: "11",
+        label: "Create Admin",
+      },
+      {
+        key: "21",
+        label: "Create Student",
+      },
+    ],
+  },
+  //   UserOutlined,
+  //   VideoCameraOutlined,
+  //   UploadOutlined,
+  //   UserOutlined,
+].map((item, index) => ({
   key: String(index + 1),
-  icon: createElement(icon),
-  label: `nav ${index + 1}`,
+  //   icon: createElement(icon),
+  label: ` ${item.label}`,
 }));
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -26,7 +48,7 @@ const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout style={{ height: "100vh" }}>
-      {/* <Sider
+      <Sider
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={(broken) => {
@@ -43,8 +65,8 @@ const MainLayout = () => {
           defaultSelectedKeys={["4"]}
           items={items}
         />
-      </Sider> */}
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      </Sider>
+      {/* <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Menu
           theme="dark"
@@ -68,7 +90,7 @@ const MainLayout = () => {
             },
           ]}
         />
-      </Sider>
+      </Sider> */}
       <Layout>
         <Header style={{ padding: 0 }}>
           <Button
